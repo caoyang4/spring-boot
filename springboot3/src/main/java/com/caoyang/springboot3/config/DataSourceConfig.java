@@ -21,6 +21,9 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
+    @Value("${spring.datasource.driver-class-name}")
+    private String driverName;
+
     @Value("${spring.datasource.url}")
     private String jdbcRef;
 
@@ -37,10 +40,10 @@ public class DataSourceConfig {
     @Bean
     public DataSource dataSource() {
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
-        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.url("jdbc:mysql://localhost:3306/spring");
-        dataSourceBuilder.username("spring");
-        dataSourceBuilder.password("spring");
+        dataSourceBuilder.driverClassName(driverName);
+        dataSourceBuilder.url(jdbcRef);
+        dataSourceBuilder.username(userName);
+        dataSourceBuilder.password(password);
         return dataSourceBuilder.build();
     }
 

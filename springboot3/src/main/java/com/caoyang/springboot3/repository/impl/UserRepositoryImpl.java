@@ -1,7 +1,9 @@
 package com.caoyang.springboot3.repository.impl;
 
+import com.caoyang.springboot3.annotation.DataSourceLog;
 import com.caoyang.springboot3.dao.UserDO;
 import com.caoyang.springboot3.mapper.UserMapper;
+import com.caoyang.springboot3.repository.DataSourceType;
 import com.caoyang.springboot3.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +22,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Autowired
     private UserMapper userMapper;
 
+    @DataSourceLog(type = DataSourceType.MYSQL)
     @Override
     public UserDO getUser(String name) {
         Example example = new Example(UserDO.class);

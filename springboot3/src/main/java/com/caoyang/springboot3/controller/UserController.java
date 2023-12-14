@@ -4,6 +4,7 @@ import com.caoyang.springboot3.dao.UserDO;
 import com.caoyang.springboot3.service.UserService;
 import com.caoyang.springboot3.transfer.UserTransfer;
 import com.caoyang.springboot3.vo.UserVO;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +22,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/boot3")
 public class UserController {
+
+    @PostConstruct
+    public void init() {
+        log.info("welcome to UserController");
+    }
 
     @Autowired
     private UserService userService;

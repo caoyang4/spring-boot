@@ -1,6 +1,8 @@
 package com.caoyang.springboot3.repository.impl;
 
+import com.caoyang.springboot3.annotation.DataSourceLog;
 import com.caoyang.springboot3.dao.UserDO;
+import com.caoyang.springboot3.repository.DataSourceType;
 import com.caoyang.springboot3.repository.RedisClient;
 import com.caoyang.springboot3.repository.UserCache;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +24,9 @@ public class UserCacheImpl  implements UserCache {
         return "user:" + name;
     }
 
+    @DataSourceLog(type = DataSourceType.REDIS)
     @Override
     public UserDO getUser(String name) {
-        log.info("Getting user from cache: {}", formatKey(name));
         return redisClient.get(formatKey(name), UserDO.class);
     }
 
