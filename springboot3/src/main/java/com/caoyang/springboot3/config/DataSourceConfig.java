@@ -2,6 +2,7 @@ package com.caoyang.springboot3.config;
 
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -20,7 +21,14 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfig {
 
-    private static final String JDBC_REF = "jdbc:mysql://localhost:3306/spring";
+    @Value("${spring.datasource.url}")
+    private String jdbcRef;
+
+    @Value("${spring.datasource.username}")
+    private String userName;
+
+    @Value("${spring.datasource.password}")
+    private String password;
 
     private static final String MODEL_PACKAGE = "com.caoyang.springboot3.dao";
 
@@ -30,7 +38,7 @@ public class DataSourceConfig {
     public DataSource dataSource() {
         DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
         dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceBuilder.url(JDBC_REF);
+        dataSourceBuilder.url("jdbc:mysql://localhost:3306/spring");
         dataSourceBuilder.username("spring");
         dataSourceBuilder.password("spring");
         return dataSourceBuilder.build();
