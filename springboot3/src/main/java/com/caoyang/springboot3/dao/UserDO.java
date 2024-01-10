@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -20,7 +21,7 @@ import java.util.Date;
 @Data
 @Builder
 @Table(name = "user")
-public class UserDO {
+public class UserDO implements Serializable {
 
     @Id
     @Column(name = "id")
